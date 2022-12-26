@@ -8,14 +8,19 @@ const PORT = process.env.PORT || 4000
 const cookieParser = require("cookie-parser")
 
 const authRouter = require("./routes/authRoute")
+const productRouter = require("./routes/productRoute")
 
+// connect DB
 dbConnect()
 
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+// Routes
 app.use("/api/user", authRouter)
+app.use("/api/product", productRouter)
 
+// handler middleware
 app.use(notFound)
 app.use(errorHandler)
 
