@@ -6,6 +6,7 @@ const app = express()
 const dotenv = require("dotenv").config()
 const PORT = process.env.PORT || 4000
 const cookieParser = require("cookie-parser")
+const morgan = require("morgan")
 
 const authRouter = require("./routes/authRoute")
 const productRouter = require("./routes/productRoute")
@@ -13,6 +14,7 @@ const productRouter = require("./routes/productRoute")
 // connect DB
 dbConnect()
 
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
