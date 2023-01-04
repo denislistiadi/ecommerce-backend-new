@@ -10,6 +10,7 @@ const {
   unblockUser,
   handleRefreshToken,
   logoutUser,
+  updatePasswordUser,
 } = require("../controllers/userController")
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware")
 const router = express.Router()
@@ -23,6 +24,7 @@ router.get("/logout", logoutUser)
 router.get("/:id", authMiddleware, isAdmin, getUser)
 
 router.put("/edit", authMiddleware, updateUser)
+router.put("/password", authMiddleware, updatePasswordUser)
 router.put("/block/:id", authMiddleware, isAdmin, blockUser)
 router.put("/unblock/:id", authMiddleware, isAdmin, unblockUser)
 
