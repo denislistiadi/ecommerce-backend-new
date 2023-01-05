@@ -10,6 +10,7 @@ const morgan = require("morgan")
 
 const authRouter = require("./routes/authRoute")
 const productRouter = require("./routes/productRoute")
+const blogRouter = require("./routes/blogRoute")
 
 // connect DB
 dbConnect()
@@ -21,6 +22,7 @@ app.use(cookieParser())
 // Routes
 app.use("/api/user", authRouter)
 app.use("/api/product", productRouter)
+app.use("/api/blog", blogRouter)
 
 // handler middleware
 app.use(notFound)
