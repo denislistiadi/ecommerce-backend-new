@@ -12,6 +12,7 @@ const authRouter = require("./routes/authRoute")
 const productRouter = require("./routes/productRoute")
 const blogRouter = require("./routes/blogRoute")
 const categoryRouter = require("./routes/prodCategoryRoute")
+const blogCategoryRouter = require("./routes/blogCategoryRoute")
 
 // connect DB
 dbConnect()
@@ -25,6 +26,7 @@ app.use("/api/user", authRouter)
 app.use("/api/product", productRouter)
 app.use("/api/blog", blogRouter)
 app.use("/api/category", categoryRouter)
+app.use("/api/blog-category", blogCategoryRouter)
 
 // handler middleware
 app.use(notFound)
