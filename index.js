@@ -9,9 +9,12 @@ const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 
 const authRouter = require("./routes/authRoute")
+
 const productRouter = require("./routes/productRoute")
-const blogRouter = require("./routes/blogRoute")
 const categoryRouter = require("./routes/prodCategoryRoute")
+const brandRouter = require("./routes/brandRoute")
+
+const blogRouter = require("./routes/blogRoute")
 const blogCategoryRouter = require("./routes/blogCategoryRoute")
 
 // connect DB
@@ -27,6 +30,7 @@ app.use("/api/product", productRouter)
 app.use("/api/blog", blogRouter)
 app.use("/api/category", categoryRouter)
 app.use("/api/blog-category", blogCategoryRouter)
+app.use("/api/brand", brandRouter)
 
 // handler middleware
 app.use(notFound)
