@@ -27,7 +27,7 @@ router.post("/forgot-password", forgotPasswordToken)
 
 router.get("/", getAllUser)
 router.get("/refresh", handleRefreshToken)
-router.get("/logout", logoutUser) 
+router.get("/logout", logoutUser)
 router.get("/wishlist", authMiddleware, getWishlist)
 router.get("/:id", authMiddleware, isAdmin, getUser)
 
