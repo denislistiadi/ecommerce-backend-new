@@ -15,6 +15,9 @@ const categoryRouter = require("./routes/prodCategoryRoute")
 const brandRouter = require("./routes/brandRoute")
 const couponRouter = require("./routes/couponRoute")
 
+const cartRouter = require("./routes/cartRoute")
+const orderRouter = require("./routes/orderRoute")
+
 const blogRouter = require("./routes/blogRoute")
 const blogCategoryRouter = require("./routes/blogCategoryRoute")
 
@@ -33,6 +36,8 @@ app.use("/api/category", categoryRouter)
 app.use("/api/blog-category", blogCategoryRouter)
 app.use("/api/brand", brandRouter)
 app.use("/api/coupon", couponRouter)
+app.use("/api/cart", cartRouter)
+app.use("/api/order", orderRouter)
 
 // handler middleware
 app.use(notFound)
