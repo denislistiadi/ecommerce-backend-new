@@ -39,14 +39,12 @@ const blogSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    image: {
-      type: String,
-      default:
-        "https://www.fastcat.com.ph/wp-content/uploads/2016/04/dummy-post-horisontal-thegem-blog-default.jpg",
-    },
     author: {
       type: String,
       default: "Admin",
+    },
+    images: {
+      type: Array,
     },
   },
   {
