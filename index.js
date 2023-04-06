@@ -1,48 +1,52 @@
-const bodyParser = require("body-parser")
-const express = require("express")
-const dbConnect = require("./config/dbConnect")
-const { notFound, errorHandler } = require("./middlewares/errorHandler")
-const app = express()
-const dotenv = require("dotenv").config()
-const PORT = process.env.PORT || 4000
-const cookieParser = require("cookie-parser")
-const morgan = require("morgan")
+const bodyParser = require('body-parser');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+// eslint-disable-next-line no-unused-vars
+const dotenv = require('dotenv').config();
+const dbConnect = require('./config/dbConnect');
+const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
-const authRouter = require("./routes/authRoute")
+const app = express();
 
-const productRouter = require("./routes/productRoute")
-const categoryRouter = require("./routes/prodCategoryRoute")
-const brandRouter = require("./routes/brandRoute")
-const couponRouter = require("./routes/couponRoute")
+const PORT = process.env.PORT || 4000;
 
-const cartRouter = require("./routes/cartRoute")
-const orderRouter = require("./routes/orderRoute")
+const authRouter = require('./routes/authRoute');
 
-const blogRouter = require("./routes/blogRoute")
-const blogCategoryRouter = require("./routes/blogCategoryRoute")
+const productRouter = require('./routes/productRoute');
+const categoryRouter = require('./routes/prodCategoryRoute');
+const brandRouter = require('./routes/brandRoute');
+const couponRouter = require('./routes/couponRoute');
+
+const cartRouter = require('./routes/cartRoute');
+const orderRouter = require('./routes/orderRoute');
+
+const blogRouter = require('./routes/blogRoute');
+const blogCategoryRouter = require('./routes/blogCategoryRoute');
 
 // connect DB
-dbConnect()
+dbConnect();
 
-app.use(morgan('dev'))
-app.use(bodyParser.json())
-app.use(cookieParser())
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Routes
-app.use("/api/user", authRouter)
-app.use("/api/product", productRouter)
-app.use("/api/blog", blogRouter)
-app.use("/api/category", categoryRouter)
-app.use("/api/blog-category", blogCategoryRouter)
-app.use("/api/brand", brandRouter)
-app.use("/api/coupon", couponRouter)
-app.use("/api/cart", cartRouter)
-app.use("/api/order", orderRouter)
+app.use('/api/user', authRouter);
+app.use('/api/product', productRouter);
+app.use('/api/blog', blogRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/blog-category', blogCategoryRouter);
+app.use('/api/brand', brandRouter);
+app.use('/api/coupon', couponRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
 
 // handler middleware
-app.use(notFound)
-app.use(errorHandler)
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server is running at ${PORT}`)
-})
+  // eslint-disable-next-line no-console
+  console.log(`Server is running at ${PORT}`);
+});

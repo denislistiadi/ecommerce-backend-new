@@ -1,18 +1,19 @@
-const express = require("express")
+const express = require('express');
 const {
   addCart,
   getCart,
   emptyCart,
   applyCoupon,
-} = require("../controllers/cartController")
-const { authMiddleware } = require("../middlewares/authMiddleware")
-const router = express.Router()
+} = require('../controllers/cartController');
+const { authMiddleware } = require('../middlewares/authMiddleware');
 
-router.post("/", authMiddleware, addCart)
-router.post("/apply-coupon", authMiddleware, applyCoupon)
+const router = express.Router();
 
-router.get("/", authMiddleware, getCart)
+router.post('/', authMiddleware, addCart);
+router.post('/apply-coupon', authMiddleware, applyCoupon);
 
-router.delete("/", authMiddleware, emptyCart)
+router.get('/', authMiddleware, getCart);
 
-module.exports = router
+router.delete('/', authMiddleware, emptyCart);
+
+module.exports = router;

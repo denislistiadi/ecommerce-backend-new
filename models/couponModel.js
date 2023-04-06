@@ -1,4 +1,4 @@
-const mongoose = require("mongoose") // Erase if already required
+const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 const coupenSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ const coupenSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-})
+});
 
-//Export the model
-module.exports = mongoose.model("Coupon", coupenSchema)
+// Export the model
+module.exports = mongoose.model('Coupon', coupenSchema);

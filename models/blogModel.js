@@ -1,4 +1,4 @@
-const mongoose = require("mongoose") // Erase if already required
+const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 const blogSchema = new mongoose.Schema(
@@ -30,18 +30,18 @@ const blogSchema = new mongoose.Schema(
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
     dislikes: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
     author: {
       type: String,
-      default: "Admin",
+      default: 'Admin',
     },
     images: {
       type: Array,
@@ -55,8 +55,8 @@ const blogSchema = new mongoose.Schema(
       virtuals: true,
     },
     timestamps: true,
-  }
-)
+  },
+);
 
-//Export the model
-module.exports = mongoose.model("Blog", blogSchema)
+// Export the model
+module.exports = mongoose.model('Blog', blogSchema);
