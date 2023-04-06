@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
 // Declare the Schema of the Mongo model
 const brandSchema = new mongoose.Schema(
@@ -10,8 +10,8 @@ const brandSchema = new mongoose.Schema(
       index: true,
     },
   },
-  { timestamps: true }
-)
+  { timestamps: true },
+);
 
-//Export the model
-module.exports = mongoose.model("Brand", brandSchema)
+// Export the model
+module.exports = mongoose.model('Brand', brandSchema);

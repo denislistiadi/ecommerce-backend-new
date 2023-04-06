@@ -1,4 +1,4 @@
-const mongoose = require("mongoose") // Erase if already required
+const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 const cartSchema = new mongoose.Schema(
@@ -7,7 +7,7 @@ const cartSchema = new mongoose.Schema(
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          ref: 'Product',
         },
         count: Number,
         color: String,
@@ -18,11 +18,11 @@ const cartSchema = new mongoose.Schema(
     totalAfterDiscount: Number,
     orderby: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
-  { timestamps: true }
-)
+  { timestamps: true },
+);
 
-//Export the model
-module.exports = mongoose.model("Cart", cartSchema)
+// Export the model
+module.exports = mongoose.model('Cart', cartSchema);

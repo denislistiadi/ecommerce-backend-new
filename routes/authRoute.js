@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require('express');
 const {
   createUser,
   loginUser,
@@ -16,28 +16,29 @@ const {
   loginAdmin,
   getWishlist,
   saveAddress,
-} = require("../controllers/userController")
-const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware")
-const router = express.Router()
+} = require('../controllers/userController');
+const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware');
 
-router.post("/register", createUser)
-router.post("/login", loginUser)
-router.post("/login-admin", loginAdmin)
-router.post("/forgot-password", forgotPasswordToken)
+const router = express.Router();
 
-router.get("/", getAllUser)
-router.get("/refresh", handleRefreshToken)
-router.get("/logout", logoutUser)
-router.get("/wishlist", authMiddleware, getWishlist)
-router.get("/:id", authMiddleware, isAdmin, getUser)
+router.post('/register', createUser);
+router.post('/login', loginUser);
+router.post('/login-admin', loginAdmin);
+router.post('/forgot-password', forgotPasswordToken);
 
-router.put("/edit", authMiddleware, updateUser)
-router.put("/address", authMiddleware, saveAddress)
-router.put("/password", authMiddleware, updatePasswordUser)
-router.put("/reset-password/:token", resetPasswordToken)
-router.put("/block/:id", authMiddleware, isAdmin, blockUser)
-router.put("/unblock/:id", authMiddleware, isAdmin, unblockUser)
+router.get('/', getAllUser);
+router.get('/refresh', handleRefreshToken);
+router.get('/logout', logoutUser);
+router.get('/wishlist', authMiddleware, getWishlist);
+router.get('/:id', authMiddleware, isAdmin, getUser);
 
-router.delete("/:id", deleteUser)
+router.put('/edit', authMiddleware, updateUser);
+router.put('/address', authMiddleware, saveAddress);
+router.put('/password', authMiddleware, updatePasswordUser);
+router.put('/reset-password/:token', resetPasswordToken);
+router.put('/block/:id', authMiddleware, isAdmin, blockUser);
+router.put('/unblock/:id', authMiddleware, isAdmin, unblockUser);
 
-module.exports = router
+router.delete('/:id', deleteUser);
+
+module.exports = router;

@@ -1,15 +1,15 @@
-const { Router } = require("express")
-const express = require("express")
+const express = require('express');
 const {
   createOrder,
   getUserOrders,
   updateOrderStatus,
-} = require("../controllers/orderController")
-const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware")
-const router = express.Router()
+} = require('../controllers/orderController');
+const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware');
 
-router.get("/user", authMiddleware, getUserOrders)
-router.post("/", authMiddleware, createOrder)
-router.put("/:id", authMiddleware, isAdmin, updateOrderStatus)
+const router = express.Router();
 
-module.exports = router
+router.get('/user', authMiddleware, getUserOrders);
+router.post('/', authMiddleware, createOrder);
+router.put('/:id', authMiddleware, isAdmin, updateOrderStatus);
+
+module.exports = router;

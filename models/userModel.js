@@ -1,6 +1,7 @@
-const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
-const crypto = require("crypto")
+/* eslint-disable func-names */
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema(
@@ -29,7 +30,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "user",
+      default: 'user',
     },
     isBlocked: {
       type: Boolean,
@@ -42,37 +43,37 @@ const userSchema = new mongoose.Schema(
     address: {
       type: String,
     },
-    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
     refreshToken: { type: String },
     passwordChangeAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
-  { timestamps: true }
-)
+  { timestamps: true },
+);
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next()
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
   }
 
-  const salt = await bcrypt.genSaltSync(10)
-  this.password = await bcrypt.hash(this.password, salt)
-})
+  const salt = await bcrypt.genSaltSync(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 userSchema.methods.isPasswordMatched = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password)
-}
+  return bcrypt.compare(enteredPassword, this.password);
+};
 
 userSchema.methods.createPasswordResetToken = async function () {
-  const resetToken = crypto.randomBytes(32).toString("hex")
+  const resetToken = crypto.randomBytes(32).toString('hex');
   this.passwordResetToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(resetToken)
-    .digest("hex")
-  this.passwordResetExpires = Date.now() + 30 * 60 * 1000 // 10 minutes
-  return resetToken
-}
+    .digest('hex');
+  this.passwordResetExpires = Date.now() + 30 * 60 * 1000; // 10 minutes
+  return resetToken;
+};
 
-//Export the model
-module.exports = mongoose.model("User", userSchema)
+// Export the model
+module.exports = mongoose.model('User', userSchema);
