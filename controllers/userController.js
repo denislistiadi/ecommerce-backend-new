@@ -204,14 +204,18 @@ const logoutUser = asyncHandler(async (req, res) => {
   const cookie = req.cookies
   if (!cookie) throw new Error("No Refresh Token in Cookies")
   const refreshToken = cookie.refreshToken
-  const user = await User.findOne({ refreshToken })
-  if (!user) {
+  try {
+    const user = await User.findOne({ refreshToken })
+    if (!user) {
+      res.clearCookie("refreshToken", { httpOnly: true, secure: true })
+      return res.sendStatus(204)
+    }
+    await User.findOneAndUpdate(refreshGenerateToken, { refreshToken: "" })
     res.clearCookie("refreshToken", { httpOnly: true, secure: true })
-    return res.sendStatus(204)
+    res.json({ message: "User logout successfully" })
+  } catch (error) {
+    throw new Error(error)
   }
-  await User.findOneAndUpdate(refreshGenerateToken, { refreshToken: "" })
-  res.clearCookie("refreshToken", { httpOnly: true, secure: true })
-  res.sendStatus(204)
 })
 
 // Change Password User
