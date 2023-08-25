@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 // eslint-disable-next-line no-unused-vars
 const dotenv = require('dotenv').config();
+const cors = require('cors');
 const dbConnect = require('./config/dbConnect');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
@@ -26,6 +27,8 @@ const blogCategoryRouter = require('./routes/blogCategoryRoute');
 
 // connect DB
 dbConnect();
+
+app.use(cors());
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
