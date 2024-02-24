@@ -207,7 +207,6 @@ const unblockUser = asyncHandler(async (req, res) => {
 // eslint-disable-next-line consistent-return
 const logoutUser = asyncHandler(async (req, res) => {
   const cookie = req.cookies;
-  console.log(cookie);
   if (!cookie) throw new Error('No Refresh Token in Cookies');
   const { refreshToken } = cookie;
   try {
