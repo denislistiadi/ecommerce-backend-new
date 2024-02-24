@@ -30,7 +30,7 @@ dbConnect();
 
 app.use(cors());
 
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 

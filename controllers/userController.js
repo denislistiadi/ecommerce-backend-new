@@ -8,6 +8,7 @@ const { generateToken } = require('../config/jwtToken');
 const validateMongodbId = require('../utils/validateMongodbId');
 const { refreshGenerateToken } = require('../config/refreshToken');
 const sendEmail = require('./emailController');
+const { errorHandler } = require('../middlewares/errorHandler');
 
 // Register User
 const createUser = asyncHandler(async (req, res) => {
@@ -58,7 +59,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   // check if user admin
   const findAdmin = await User.findOne({ email });
-  if (findAdmin.role !== 'admin') throw new Error('Account is Not Authorized');
+  if (findAdmin === null || findAdmin.role !== 'admin') { res.status(401).json({ message: 'Invalid Email or Password' }); }
   if (findAdmin && (await findAdmin.isPasswordMatched(password))) {
     const refreshToken = await refreshGenerateToken(findAdmin?._id);
     const updateUser = await User.findByIdAndUpdate(
@@ -71,7 +72,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
       maxAge: 72 * 60 * 60 * 1000,
     });
     res.json({
-      _id: findAdmin?._id,
+      id: findAdmin?._id,
       firstname: findAdmin?.firstname,
       lastname: findAdmin?.lastname,
       email: findAdmin?.email,
@@ -79,7 +80,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
       token: generateToken(findAdmin?._id),
     });
   } else {
-    throw Error('Invalid Email or Password');
+    res.status(401).json({ message: 'Invalid Email or Password' });
   }
 });
 
@@ -91,7 +92,9 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
   const user = await User.findOne({ refreshToken });
   if (!user) throw new Error('No matched user');
   jwt.verify(refreshToken, process.env.JWT_SECRET, (err, decoded) => {
-    if (err || user.id !== decoded.id) { throw new Error('There is something wrong with refresh token'); }
+    if (err || user.id !== decoded.id) {
+      throw new Error('There is something wrong with refresh token');
+    }
     const accessToken = generateToken(user?._id);
     res.json({ accessToken });
   });
